@@ -1,17 +1,32 @@
 #include <stdio.h>
 
+void printn(int *nptr){
+    printf("%d\n", *nptr);
+}
+
+void printl(char *cptr){
+    printf("%c\n", *cptr);
+}
+
+void print(void *ptr, char type){
+    switch (type){
+        case 'i':printf("%d\n",*((int*)ptr));
+            break;
+        case 'c':printf("%c\n",*((char*)ptr));
+            break;
+    }
+}
+
 int main()
 {   
-    int n = 5;
-    int *nptr = &n;
+    int i = 9;
+    char l = 'l';
 
-    printf("%p\n", nptr);
-    printf("%d\n", *nptr);
+    printn(&i);
+    printl(&l);
 
-    *nptr = 10;
-
-    printf("%p\n", nptr);
-    printf("%d\n", *nptr);
+    print(&i, 'i');
+    print(&l, 'c');
     
     return 0;
 }
