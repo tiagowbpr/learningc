@@ -1,32 +1,16 @@
 #include <stdio.h>
-
-void printn(int *nptr){
-    printf("%d\n", *nptr);
-}
-
-void printl(char *cptr){
-    printf("%c\n", *cptr);
-}
-
-void print(void *ptr, char type){
-    switch (type){
-        case 'i':printf("%d\n",*((int*)ptr));
-            break;
-        case 'c':printf("%c\n",*((char*)ptr));
-            break;
-    }
-}
+#include "prints.h"
 
 int main()
 {   
-    int i = 9;
-    char l = 'l';
+    int numbers[] = {12, 54, 777, 1, 90};
 
-    printn(&i);
-    printl(&l);
+    printf("%p\n", numbers);
+    printf("%p\n", numbers+1);
 
-    print(&i, 'i');
-    print(&l, 'c');
-    
+    pd(numbers[1]);
+    pp(&numbers[1]);
+    pd(*numbers);
+    pd(*(numbers+2));
     return 0;
 }
