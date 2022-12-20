@@ -2,12 +2,11 @@
 #include "../cache.h"
 
 
-int main()
+int main(int argc, char **argv)
 {   
-    if (mkdir("testdir", 0700) < 0) {
-        perror("unable to create the directory");
-        printf("%d\n", errno);
-        exit(1);
+    printf("argc: %d\n", argc);
+    for (int i = 0; i < argc; i++) {
+        printf("argv[%d]: %s\n", i, argv[i]);
     }
     return 0;
 }
