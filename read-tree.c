@@ -7,5 +7,7 @@ int main (int argc, char **argv)
 
     if (argc != 2)
         usage("read-tree <key>");
+    if (get_sha1_hex(argv[1], sha1) < 0)
+        usage("read-tree <key>");
     return 0;
 }
