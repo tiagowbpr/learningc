@@ -1,22 +1,24 @@
 #include <stdio.h>
-#include "../cache.h"
 
-static unsigned hexval(char c)
+/* func receive a pointer to an array*/
+int func(unsigned char *chs)
 {
-	if (c >= '0' && c <= '9')
-		return c - '0';
-	if (c >= 'a' && c <= 'f')
-		return c - 'a' + 10;
-	if (c >= 'A' && c <= 'F')
-		return c - 'A' + 10;
-	return ~0;
+    printf("%d\n", *chs++);
+    printf("%d\n", *chs++);
+    printf("%d\n", *chs++);
 }
 
 int main(int argc, char **argv)
 {   
-    int i;
-    for (i = 1; i < argc; i ++) {
-        printf("%s: %d\n", argv[i], hexval(argv[i][0]));
-    }
+    /* Trying to understand *sha1++ = val */
+    unsigned char chs[20];
+    chs[0] = 1;
+    chs[1] = 2;
+    chs[2] = 3;
+    /* When creating an array you get a pointer to the first element */
+    printf("%p\n", chs);
+
+    func(chs);
+
     return 0;
 }
