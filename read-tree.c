@@ -1,11 +1,5 @@
 #include "cache.h"
 
-void usage(const char *err)
-{
-    fprintf(stderr, "read-tree: %s\n", err);
-    exit(1);
-}
-
 int main (int argc, char **argv)
 {
     int fd;

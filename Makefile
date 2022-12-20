@@ -7,8 +7,8 @@ all: $(PROG)
 
 init-db: init-db.o
 
-read-tree: read-tree.o 
-	$(CC) $(CFLAGS) -o read-tree read-tree.o  $(LIBS)
+read-tree: read-tree.o read-cache.o
+	$(CC) $(CFLAGS) -o read-tree read-tree.o read-cache.o $(LIBS)
 
 clean:
 	rm -fr *.o $(PROG) .dircache
