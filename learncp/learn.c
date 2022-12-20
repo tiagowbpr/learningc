@@ -4,10 +4,7 @@
 
 int main()
 {   
-    if (mkdir("testdir", 0700) < 0) {
-        perror("unable to create the directory");
-        printf("%d\n", errno);
-        exit(1);
-    }
+    printf("%d\n", ~0);
+    printf("%0b\n", ~0);
     return 0;
 }
