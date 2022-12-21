@@ -1,37 +1,42 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 
 
 void pb(int i) {
     printf("%08b\n", i);
 }
 
+char * sha1_to_hex(unsigned char *sha1)
+{
+	static char buffer[50];
+	static const char hex[] = "0123456789abcdef";
+	char *buf = buffer;
+	int i;
+
+	for (i = 0; i < 20; i++) {
+		unsigned int val = *sha1++;
+		*buf++ = hex[val >> 4];
+		*buf++ = hex[val & 0xf];
+	}
+	return buffer;
+}
+
 int main(int argc, char **argv)
-{   
-    unsigned char ch = 127;
-    unsigned char ch2 = 255;
-    static char hex[2];
-    char *buf = hex;
-    static const char hexchars[] = "0123456789abcdef";
+{
+    unsigned char chs[20];
+    int i;
+    unsigned char *res;
+    srand(time(0));
 
-    *buf++ = hexchars[ch >> 4];
-    *buf = hexchars[ch & 0xf];
+    for (i = 0; i < 20; i++) {
+        chs[i] = rand() % 256;
+        pb(chs[i]);
+    }
+    
+    res = sha1_to_hex(chs);
 
-    pb(ch);
-    pb(ch >> 4);
-
-    pb(0xf);
-    pb(ch & 0xf);
-    pb(ch2 & 0xf);
-
-
-    printf("--------\n");
-    printf("%s\n", hex);
-
-    *--buf = hexchars[ch2 >> 4];
-    *++buf = hexchars[ch2 & 0xf];
-
-    printf("--------\n");
-    printf("%s\n", hex);
+    printf("%s\n", res);
 
     return 0;
 }
