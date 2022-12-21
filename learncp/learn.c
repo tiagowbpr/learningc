@@ -5,46 +5,33 @@ void pb(int i) {
     printf("%08b\n", i);
 }
 
-/* Trying to understand the & , | and << operator */
+/* Trying to understand if (val & ~0xff) */
 int main(int argc, char **argv)
 {   
-    unsigned int i = 1;
-    unsigned int ii = 2;
-    unsigned int iii = 4;
-    unsigned int iiii = 8;
-    unsigned int iiiii = 16;
-    unsigned int iiiiii = 32;
-    unsigned int iiiiiii = 64;
-    unsigned int iiiiiiii = 128;
+    unsigned int val = 12;
+    pb(~0xff);
+    pb(0xff);
+    printf("%d\n", 0xff);
+    /* 0xff is the maximum number represented by one byte 11111111 
+     * ~0xff flips all the bits and aparently ~ operator returns a
+     * 4 byte size number, an int?
+    **/
 
-    unsigned int temp;
+    pb(val & ~0xff);
+    val = 255;
+    pb(val & ~0xff);
+    val = 256;
+    pb(val & ~0xff);
 
-    pb(i);
-    pb(ii);
-    pb(iii);
-    pb(iiii);
-    pb(iiiii);
-    pb(iiiiii);
-    pb(iiiiiii);
-    pb(iiiiiiii);
+    printf("-------\n");
+
+    val = 34;
+    if(val & ~0xff)
+        pb(val & ~0xff); /* less than 255 */
+
+    val = 256;
+    if(val & ~0xff)
+        pb(val & ~0xff); /* greater than 255, will print*/
     
-    temp = i << 1;
-    pb(temp);
-    temp = i << 2;
-    pb(temp);
-    temp = i << 3;
-    pb(temp);
-    temp = i << 4;
-    pb(temp);
-
-    /* << aplies powers of 2 to a number*/
-
-    pb(i | ii);
-    pb(i | ii | iii | iiii);
-
-    pb(i & ii);
-    pb(i << 1 & ii);
-
-    pb(temp);
-    pb(temp & ~0xff);
+    return 0;
 }
