@@ -1,36 +1,41 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 
 void pb(int i) {
     printf("%08b\n", i);
 }
 
-/* Trying to understand if (val & ~0xff) */
+char * sha1_to_hex(unsigned char *sha1)
+{
+	static char buffer[50];
+	static const char hex[] = "0123456789abcdef";
+	char *buf = buffer;
+	int i;
+
+	for (i = 0; i < 20; i++) {
+		unsigned int val = *sha1++;
+		*buf++ = hex[val >> 4];
+		*buf++ = hex[val & 0xf];
+	}
+	return buffer;
+}
+
 int main(int argc, char **argv)
-{   
-    unsigned int val = 12;
-    pb(~0xff);
-    pb(0xff);
-    printf("%d\n", 0xff);
-    /* 0xff is the maximum number represented by one byte 11111111 
-     * ~0xff flips all the bits and aparently ~ operator returns a
-     * 4 byte size number, an int?
-    **/
+{
+    unsigned char chs[20];
+    int i;
+    unsigned char *res;
+    srand(time(0));
 
-    pb(val & ~0xff);
-    val = 255;
-    pb(val & ~0xff);
-    val = 256;
-    pb(val & ~0xff);
-
-    printf("-------\n");
-
-    val = 34;
-    if(val & ~0xff)
-        pb(val & ~0xff); /* less than 255 */
-
-    val = 256;
-    if(val & ~0xff)
-        pb(val & ~0xff); /* greater than 255, will print*/
+    for (i = 0; i < 20; i++) {
+        chs[i] = rand() % 256;
+        pb(chs[i]);
+    }
     
+    res = sha1_to_hex(chs);
+
+    printf("%s\n", res);
+
     return 0;
 }
