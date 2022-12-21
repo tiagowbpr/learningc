@@ -1,27 +1,50 @@
 #include <stdio.h>
 
-/* func receive a pointer to an array*/
-int func(unsigned char *chs)
-{
-    unsigned char start = 97;
-    int i;
-    for (i = 0; i < 20; i++) {
-        *chs++ = start;
-        start++;
-    }
-    return 0;
+
+void pb(int i) {
+    printf("%08b\n", i);
 }
 
+/* Trying to understand the & , | and << operator */
 int main(int argc, char **argv)
 {   
-    /* Trying to understand *sha1++ = val */
-    unsigned char chs[20];
-    /* When creating an array you get a pointer to the first element */
-    printf("%p\n", chs);
+    unsigned int i = 1;
+    unsigned int ii = 2;
+    unsigned int iii = 4;
+    unsigned int iiii = 8;
+    unsigned int iiiii = 16;
+    unsigned int iiiiii = 32;
+    unsigned int iiiiiii = 64;
+    unsigned int iiiiiiii = 128;
 
-    func(chs);
+    unsigned int temp;
 
-    printf("%s\n", chs);
+    pb(i);
+    pb(ii);
+    pb(iii);
+    pb(iiii);
+    pb(iiiii);
+    pb(iiiiii);
+    pb(iiiiiii);
+    pb(iiiiiiii);
+    
+    temp = i << 1;
+    pb(temp);
+    temp = i << 2;
+    pb(temp);
+    temp = i << 3;
+    pb(temp);
+    temp = i << 4;
+    pb(temp);
 
-    return 0;
+    /* << aplies powers of 2 to a number*/
+
+    pb(i | ii);
+    pb(i | ii | iii | iiii);
+
+    pb(i & ii);
+    pb(i << 1 & ii);
+
+    pb(temp);
+    pb(temp & ~0xff);
 }
