@@ -5,33 +5,33 @@ void pb(int i) {
     printf("%08b\n", i);
 }
 
-/* Trying to understand if (val & ~0xff) */
 int main(int argc, char **argv)
 {   
-    unsigned int val = 12;
-    pb(~0xff);
-    pb(0xff);
-    printf("%d\n", 0xff);
-    /* 0xff is the maximum number represented by one byte 11111111 
-     * ~0xff flips all the bits and aparently ~ operator returns a
-     * 4 byte size number, an int?
-    **/
+    unsigned char ch = 127;
+    unsigned char ch2 = 255;
+    static char hex[2];
+    char *buf = hex;
+    static const char hexchars[] = "0123456789abcdef";
 
-    pb(val & ~0xff);
-    val = 255;
-    pb(val & ~0xff);
-    val = 256;
-    pb(val & ~0xff);
+    *buf++ = hexchars[ch >> 4];
+    *buf = hexchars[ch & 0xf];
 
-    printf("-------\n");
+    pb(ch);
+    pb(ch >> 4);
 
-    val = 34;
-    if(val & ~0xff)
-        pb(val & ~0xff); /* less than 255 */
+    pb(0xf);
+    pb(ch & 0xf);
+    pb(ch2 & 0xf);
 
-    val = 256;
-    if(val & ~0xff)
-        pb(val & ~0xff); /* greater than 255, will print*/
-    
+
+    printf("--------\n");
+    printf("%s\n", hex);
+
+    *--buf = hexchars[ch2 >> 4];
+    *++buf = hexchars[ch2 & 0xf];
+
+    printf("--------\n");
+    printf("%s\n", hex);
+
     return 0;
 }
